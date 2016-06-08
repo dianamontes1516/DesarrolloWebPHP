@@ -1,0 +1,29 @@
+* Conceptos básicos de programación *(2 horas)*
+** Tipos de datos
+** Estructuras de control de flujo
+** Ciclos
+** Paradigmas de programación
+* Orientación a Objetos *(2 horas)*
+** Clases
+** Objetos y métodos
+** métodos y variables estáticas
+** Herencia
+* Conceptos de bases de datos *(4 horas)*
+** SQL Standard
+*** Consultas simples
+*** Temas avanzados
+**** vistas
+**** Comun Table Expresions
+**** Funciones
+** Manejadores Relacionales
+*** Postgres
+** Errores frecuentes de diseño
+* Conceptos básicos de JQuery *(2 horas)*
+** JavaScript
+** Funciones Call-back
+** Bibliotecas mas socorridas.
+* MVC *(2 horas)*
+** Modelo
+** Vista
+** Controlador
+* Proyecto *(2 horas)*
