@@ -1,3 +1,5 @@
+* PHP
+** ¿Qué es PHP?
 * Conceptos básicos de programación *(2 horas)*
 ** Tipos de datos
 ** Estructuras de control de flujo
@@ -30,4 +32,5 @@
 
 * Herramientas
  - Postgres, [[https://www.adminer.org/]]
- - PHP SERVER [[]]  
+ - PHP SERVER IN-BUILT [[http://php.net/manual/en/features.commandline.webserver.php
+]]  
