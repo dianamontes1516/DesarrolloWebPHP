@@ -8,10 +8,14 @@
   * Una vez que el usuario haya rebasado su límite de tiempo de
     préstamo no podrá sacar otro libro hasta que salde la multa.
   * Por cada día de retrado tendrá una multa de $5 por libro.
-  * Un usurio podrá renovar una vez su préstamo.
+  * Un usurio podrá renovar una vez su préstamo. Esta operación
+    puede realizarse en los último dos días de su préstamo. Con 
+    esto se logra que un libro esté, sin penalización, durante 14 
+    días en posesión de una misma persona.
 
 * Casos de uso  
 ** Como consultor quiero ver que libros hay y desponibilidad
+** Como consultor quiero darme de alta como usuario.
 ** Como usuario quiero ver que libros hay y su desponibilidad.
 ** Como usuario quiero consultar si tengo un libro en préstamo
 ** Como usuario quiero consultar cuánto debo.
@@ -21,6 +25,8 @@
 ** Como administrador quiero ver que libros hay y su desponibilidad
 ** Como administrador quiero ver el historial de préstamo de un usuario.
 ** Como administrador quiero ver el historial de préstamo de un libro.
+** Como administrador quiero dar de alta un libro.
+** Como adminsitrador quiero dar de alta un nuevo autor.
 ** Como administrador quiero un reporte de los libros más solicitados en el último mes.
 ** Como administrador quiero reporte del autor mas solicitado por mes.
 ** Como administrador quiero reporte de los usuario con mas multas en el último mes.
