@@ -38,10 +38,12 @@ function routeRequest()
             echo "pops";
             return false;
             //   } */
+    }/**elseif (preg_match('/administrador/', $uri)){
+        echo file_get_contents('./modelo/administrador.php');
     }else {
         
         echo "Access DENEID";
-    }
+        }*/
 }
 
 ?>

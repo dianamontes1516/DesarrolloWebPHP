@@ -1,15 +1,26 @@
-* PHP
-** ¿Qué es PHP?
-* Conceptos básicos de programación *(2 horas)*
-** Tipos de datos
-** Estructuras de control de flujo
-** Ciclos
-** Paradigmas de programación
-* Orientación a Objetos *(2 horas)*
-** Clases
-** Objetos y métodos
-** métodos y variables estáticas
-** Herencia
+* PHP *(2 horas)*
+  * Presentación del curso
+    - Trabajo en Equipo.
+    - Requiere alta participación de los asistentes.
+    - Proyecto propio
+  * ¿Qué es PHP?
+  * Instalación 
+    * Linux
+    * Windows
+  * REGEX
+* Conocimientos de programación *(2 horas)*
+  * Tipos de datos
+    * cadenas, enteros, flotantes, booleanos
+    * Arreglos con índices y asociativos.
+  * Estructuras de control de flujo
+    * switch-case, if else
+  * Ciclos
+    * foreach, for, while
+  * funciones
+* Conocimientos de Orientación a Objetos *(3 horas)*
+  * Clases
+  * Objetos y métodos
+  * Métodos estáticos
 * Conceptos de bases de datos *(4 horas)*
 ** SQL Standard
 *** Consultas simples
@@ -20,17 +31,47 @@
 ** Manejadores Relacionales
 *** Postgres
 ** Errores frecuentes de diseño
-* Conceptos básicos de JQuery *(2 horas)*
-** JavaScript
-** Funciones Call-back
-** Bibliotecas mas socorridas.
+* Conocimientos de JQuery *(2 horas)*
+  * ¿Qué es JQuery?
+  * Instalación
+  * Call-back functions
+  * Promises
 * MVC *(2 horas)*
-** Modelo
-** Vista
-** Controlador
-* Proyecto *(2 horas)*
+  * Modelo
+  * Vista
+  * Controlador
+* Planeación del proyecto *(2 horas)*
+  * Selección de proyecto
+  * Delimitación del proyecto
+  * Uso de Git
+* Construcción del modelo *(4 horas)*
+  * Diseño de la base de datos.
+  * Bibliotecas de PHP para conexiones a la base
+    * PDO
+  * Implementación
+* Construcción de los Controladores *(4 horas)*
+  * Enrutador
+  * Lógica de negocios
+  * Manejo de sesiones
+* Construcción de las Vistas *(4 horas)*
+  * Bibliotecas de validaciones
+  * Implementación
+* Seguridad  (2 horas)
+  * SQL Injection
 
+*Nota:* El soporte en Mac OS no está garantizado.
+
+Objetivo
+
+Mostrar a /groso modo/ los aspectos del desarrollo web apoyándonos en la
+fluidez que brinda PHP en conjunción con otras herramientas.
+
+Requisitos del alumno:
+* Experiencia en programación
+* Experiencia con Bases de Datos Relacionales
+* Conocimientos de HTML
 * Herramientas
  - Postgres, [[https://www.adminer.org/]]
  - PHP SERVER IN-BUILT [[http://php.net/manual/en/features.commandline.webserver.php
-]]  
+]]    
+  
