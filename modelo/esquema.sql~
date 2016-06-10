@@ -1,0 +1,18 @@
+CREATE TABLE libro(
+       isbn
+       , titulo
+       , id_autor
+       , id_genero
+       , idioma
+);
+
+CREATE TABLE autor(
+       id
+       , nombre
+);
+
+CREATE TABLE persona(
+       id
+       , nombre
+       apellido
+);

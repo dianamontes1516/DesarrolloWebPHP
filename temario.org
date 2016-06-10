@@ -1,8 +1,13 @@
 * PHP *(2 horas)*
+  * Presentación del curso
+    - Trabajo en Equipo.
+    - Requiere alta participación de los asistentes.
+    - Proyecto propio
   * ¿Qué es PHP?
   * Instalación 
     * Linux
     * Windows
+  * REGEX
 * Conocimientos de programación *(2 horas)*
   * Tipos de datos
     * cadenas, enteros, flotantes, booleanos
@@ -16,10 +21,16 @@
   * Clases
   * Objetos y métodos
   * Métodos estáticos
-* Conocimientos de bases de datos *(3 horas)*
-  * Bases Relacionales.
-  * Postgres
-  * Instalación
+* Conceptos de bases de datos *(4 horas)*
+** SQL Standard
+*** Consultas simples
+*** Temas avanzados
+**** vistas
+**** Comun Table Expresions
+**** Funciones
+** Manejadores Relacionales
+*** Postgres
+** Errores frecuentes de diseño
 * Conocimientos de JQuery *(2 horas)*
   * ¿Qué es JQuery?
   * Instalación
@@ -32,6 +43,7 @@
 * Planeación del proyecto *(2 horas)*
   * Selección de proyecto
   * Delimitación del proyecto
+  * Uso de Git
 * Construcción del modelo *(4 horas)*
   * Diseño de la base de datos.
   * Bibliotecas de PHP para conexiones a la base
@@ -58,4 +70,8 @@ Requisitos del alumno:
 * Experiencia en programación
 * Experiencia con Bases de Datos Relacionales
 * Conocimientos de HTML
- 
+* Herramientas
+ - Postgres, [[https://www.adminer.org/]]
+ - PHP SERVER IN-BUILT [[http://php.net/manual/en/features.commandline.webserver.php
+]]    
+  
