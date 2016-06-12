@@ -14,24 +14,24 @@
     días en posesión de una misma persona.
 
 * Casos de uso  
-** Como consultor quiero ver que libros hay y desponibilidad
-** Como consultor quiero darme de alta como usuario.
-** Como usuario quiero ver que libros hay y su desponibilidad.
-** Como usuario quiero consultar si tengo un libro en préstamo
-** Como usuario quiero consultar cuánto debo.
-** Como usuario quiero consultar el historial de prestamos de libros. (Que libros y de que fecha a que fecha lo tuve).
-** Como usuario quiero renovar mi préstamo.
-** Como administrador quiero quitarle la multa a un usuario.
-** Como administrador quiero ver que libros hay y su desponibilidad
-** Como administrador quiero ver el historial de préstamo de un usuario.
-** Como administrador quiero ver el historial de préstamo de un libro.
-** Como administrador quiero dar de alta un libro.
-** Como adminsitrador quiero dar de alta un nuevo autor.
-** Como administrador quiero un reporte de los libros más solicitados en el último mes.
-** Como administrador quiero reporte del autor mas solicitado por mes.
-** Como administrador quiero reporte de los usuario con mas multas en el último mes.
+ * Como consultor quiero ver que libros hay y desponibilidad
+ * Como consultor quiero darme de alta como usuario.
+ * Como usuario quiero ver que libros hay y su desponibilidad.
+ * Como usuario quiero consultar si tengo un libro en préstamo
+ * Como usuario quiero consultar cuánto debo.
+ * Como usuario quiero consultar el historial de prestamos de libros. (Que libros y de que fecha a que fecha lo tuve).
+ * Como usuario quiero renovar mi préstamo.
+ * Como administrador quiero quitarle la multa a un usuario.
+ * Como administrador quiero ver que libros hay y su desponibilidad
+ * Como administrador quiero ver el historial de préstamo de un usuario.
+ * Como administrador quiero ver el historial de préstamo de un libro.
+ * Como administrador quiero dar de alta un libro.
+ * Como adminsitrador quiero dar de alta un nuevo autor.
+ * Como administrador quiero un reporte de los libros más solicitados en el último mes.
+ * Como administrador quiero reporte del autor mas solicitado por mes.
+ * Como administrador quiero reporte de los usuario con mas multas en el último mes.
 
 * Roles
-** Consultor
-** Usuario
-** Adminsitrador
+ * Consultor
+ * Usuario
+ * Adminsitrador

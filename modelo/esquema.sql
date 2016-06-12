@@ -1,5 +1,5 @@
 CREATE TABLE libro(
-       isbn
+        isbn 
        , titulo
        , id_autor
        , id_genero
@@ -12,18 +12,15 @@ CREATE TABLE autor(
        , nombre
 );
 
-CREATE TABLE persona(
-       id
+CREATE TABLE usuario(
+        username
        , nombre
        , apellidoP
        , apellidoM
        , correo
-);
-
-CREATE TABLE usuario(
-        username
        , id_persona
        , contraseña
+       , id_rol
 );
 
 CREATE TABLE rol(
@@ -31,16 +28,11 @@ CREATE TABLE rol(
        , nombre
 );
 
-CREATE TABLE usurio_rol(
-       id_usuario
-       ,id_rol
-);
-
 CREATE TABLE prestamo(
        id
        , id_usuario
        , id_libro
-       , fecha_inicio       
+       , fecha_inicio
 );
 
 CREATE TABLE renovación(
@@ -51,4 +43,19 @@ CREATE TABLE entrega(
        id_prestamo,
        fecha_entrega       
 );
+
+¿Qué quiero guardar?
+
+- Información de los libros
+- Información de los autores
+- Información de los usuarios
+- Información de los préstamos
+  - Cuando empezó
+  - Si tuvo renovación
+  - Fecha de entrega
+- Si una multa ya fue pagada o no
+
+Funciones:
+	activo(id_prestamo): boolean
+	multa(id_prestamo): 
 

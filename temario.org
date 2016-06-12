@@ -22,15 +22,16 @@
   * Objetos y métodos
   * Métodos estáticos
 * Conceptos de bases de datos *(4 horas)*
-** SQL Standard
-*** Consultas simples
-*** Temas avanzados
-**** vistas
-**** Comun Table Expresions
-**** Funciones
-** Manejadores Relacionales
-*** Postgres
-** Errores frecuentes de diseño
+  * SQL Standard
+    * Consultas simples
+    * Temas avanzados
+       * vistas
+       * Comun Table Expresions
+       * Funciones
+    * Manejadores Relacionales
+       * Postgres
+    * Errores frecuentes de diseño
+      * 
 * Conocimientos de JQuery *(2 horas)*
   * ¿Qué es JQuery?
   * Instalación
