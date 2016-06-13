@@ -13,9 +13,10 @@
     * cadenas, enteros, flotantes, booleanos
     * Arreglos con índices y asociativos.
   * Estructuras de control de flujo
-    * switch-case, if else
-  * Ciclos
-    * foreach, for, while
+    * Condicionales
+      * switch-case, if else
+    * Ciclos
+      * foreach, for, while
   * funciones
 * Conocimientos de Orientación a Objetos *(3 horas)*
   * Clases

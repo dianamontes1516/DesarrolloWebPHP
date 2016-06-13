@@ -9,11 +9,11 @@
  *                 correspondiente a la longitud
  * 
 */
-function palabraMinima($cadena){
+function palabraMinima(string $cadena):array{
     
 
 }
- 
+
 /**
  * Función que recibe un arreglo con una palabra y 
  * dos numero y hace una operación
@@ -25,7 +25,10 @@ function palabraMinima($cadena){
  * @retun float resultado de la operación
  * 
 */
-function calula($valores){
+function calula(array $valores):float{
     
 
 }
+
+
+palabraMinima(2);
