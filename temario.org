@@ -32,7 +32,7 @@
     * Manejadores Relacionales
        * Postgres
     * Errores frecuentes de diseño
-      * 
+      * Nulos y datos redundantes
 * Conocimientos de JQuery *(2 horas)*
   * ¿Qué es JQuery?
   * Instalación
