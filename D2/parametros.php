@@ -26,8 +26,11 @@ function sum(...$numeros) {
     }
     return $acc;
 }
-
+echo "\n";
 echo sum(1, 2, 3, 4);
+echo "\n";
+echo sum(1, 2, 3, 4,7,12);
+echo "\n";
 
 function bla3(...$valores){
     foreach($valores as $val){

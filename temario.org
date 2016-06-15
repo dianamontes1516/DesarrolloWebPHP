@@ -18,6 +18,7 @@
     * Ciclos
       * foreach, for, while
   * funciones
+    * Manejo de excepciones
 * Conocimientos de Orientación a Objetos *(3 horas)*
   * Clases
   * Objetos y métodos
@@ -27,7 +28,7 @@
     * Consultas simples
     * Temas avanzados
        * vistas
-       * Comun Table Expresions
+       * Comon Table Expresions (CTE)
        * Funciones
     * Manejadores Relacionales
        * Postgres

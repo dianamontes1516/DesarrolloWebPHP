@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 /**
  * Función que recibe una cadena y devuelve un arreglo
  * conteniendo la longitud y la palabra mas chica
@@ -10,7 +10,7 @@
  * 
 */
 function palabraMinima(string $cadena):array{
-    
+    return [$cadena];  
 
 }
 
@@ -22,13 +22,13 @@ function palabraMinima(string $cadena):array{
  *                multiplicación, división.
  *                'op1' operando 1
  *                'op2' operando 2
- * @retun float resultado de la operación
+ * @return float resultado de la operación
  * 
 */
-function calula(array $valores):float{
+function calcula(array $valores):float{
     
 
 }
 
 
-palabraMinima(2);
+var_dump(palabraMinima('2'));
