@@ -18,11 +18,15 @@ class Usuario
     /* Los miembros de la clase Usuario deberán tener 
     * las siguiente propiedades: username, password
     */
+	private $username;
+	private $password;
     
     /* Constructor
      */
-    public function __construct(){
-        
+    public function __construct(string $id,string $pass){
+        $this->username = $id;
+	$this->password = hash('sha256',$pass);
+	echo "Creación de un nuevo usuario: ".$this->username."\n";
     }
 
     /* Guarda la información del usuario en 
@@ -73,7 +77,12 @@ class Usuario
      *               falso en otro caso.
      */
     public function active():bool{
-
+	foreach(self::$usuarios as $user){
+		if($user['username'] == $this->username){
+			return TRUE;
+		}
+	}
+	return FALSE;
     }
 
     /** Regresa los usuarios en una cadena con elsig formato
@@ -87,4 +96,14 @@ class Usuario
     
 }
 
+
+
 /*************  Test Usuarios    **********/
+
+$u= new Usuario('user1','pass');
+var_dump($u->active());
+
+Usuario::$usuarios;
+
+
+
