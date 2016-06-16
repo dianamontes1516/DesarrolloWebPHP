@@ -1,5 +1,6 @@
 <?php
-declare(strict_type=1);
+declare(strict_types=1);
+include( './Div.php' );
 /**
  * Función que recibe una cadena y devuelve un arreglo
  * conteniendo la longitud y la palabra mas chica
@@ -46,6 +47,9 @@ function calcula(array $valores):float{
             return $valores['op1'] * $valores['op2'];
             
         case 'division':
+            if($valores['op2'] == 0):
+                throw new Div('Division entre 0');
+            endif;
             return $valores['op1'] / $valores['op2'];
             
         default:
@@ -53,14 +57,16 @@ function calcula(array $valores):float{
     }
 }
 
-print_r(palabraMinima("Hoy es un dia muy lluvioso"));
-$entrada = ['op' => 'sumsa',
-             'op1' => 2,
-             'op2' => 3];
+                                 //print_r(palabraMinima("Hoy es un dia muy lluvioso"));
+$entrada = ['op' => 'division',
+            'op1' => 1,
+             'op2' => 0];
 
 try{
     echo calcula($entrada);
 }catch(TypeError $e){
     echo "Operacion no reconocida\n";
+}catch(Div $d){
+    echo "Division entre 0.\n";
 }
 
