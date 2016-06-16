@@ -24,21 +24,14 @@
   * Objetos y métodos
   * Métodos estáticos
 * Conceptos de bases de datos *(4 horas)*
-  * SQL Standard
+  * Postgres SQL
     * Consultas simples
     * Temas avanzados
        * vistas
        * Comon Table Expresions (CTE)
        * Funciones
-    * Manejadores Relacionales
-       * Postgres
     * Errores frecuentes de diseño
       * Nulos y datos redundantes
-* Conocimientos de JQuery *(2 horas)*
-  * ¿Qué es JQuery?
-  * Instalación
-  * Call-back functions
-  * Promises
 * MVC *(2 horas)*
   * Modelo
   * Vista
@@ -56,6 +49,11 @@
   * Enrutador
   * Lógica de negocios
   * Manejo de sesiones
+* Conocimientos de JQuery *(2 horas)*
+  * ¿Qué es JQuery?
+  * Instalación
+  * Call-back functions
+  * Promises
 * Construcción de las Vistas *(4 horas)*
   * Bibliotecas de validaciones
   * Implementación
