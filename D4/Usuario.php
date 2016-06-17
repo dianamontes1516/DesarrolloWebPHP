@@ -36,29 +36,36 @@ class Usuario
      *               el mismo usuario. 
      */
     public function save():bool{
+        if($this->active()){
+            throw new Exception("El usuario ".$this->username." ya está guardado.");
+        }
+        $nuevo = ['username' => $this->username
+                  ,'pass' => $this->password
+                  ,'last_login' => ''];
+        array_push(self::$usuarios,$nuevo);
+        return TRUE;
     }
 
     /* Actualiza la información del usuario
      * en el arreglo de usuarios activos.
      * @return bool- verdarero en caso de éxito
      *               lanza una excepción en caso de que no
-     *               exista un usuario activo. Regresa Falso
-     *               En caso de que exista el usuario pero sea incorrecta la contraseña.    
+     *              exista un usuario activo   
      */
     public function login():bool{
-	if(!$this->active()){
-		throw new Exception("Usuario no activo");
-	}
-
+        if(!$this->active()){
+            throw new Exception("El usuario ".$this->username." no está activo.");
+        }
+        
         foreach(self::$usuarios as &$user){
-            if($user['username'] == $this->username 
-		&& $user['pass'] == $this->password ){
-		$user['last_login'] = date("F j, Y, g:i a");
-                return TRUE;
+            if($user['username'] == $this->username
+               && $user['pass'] == $this->password){
+                $user['last_login'] = date("F j, Y, g:i a");
+                break;
             }
         }
-	return FALSE;		
-
+        unset($user);
+        return TRUE;
     }
 
     /* Borra al usuario del arreglo de los
@@ -68,6 +75,19 @@ class Usuario
      *              exista un usuario activo con esos datos.  
      */
     public function delete():bool{
+        if(!$this->active()){
+            throw new Exception("El usuario ".$this->username." no está activo.");
+        }
+
+        $i=0;
+        foreach(self::$usuarios as $user){
+            if($user['username'] == $this->username){
+                break;
+            }
+            $i++;
+        }
+        unset(self::$usuarios[$i]);
+        return TRUE;
 
     }
 
@@ -80,7 +100,20 @@ class Usuario
      *              exista un usuario activo con esos datos.  
      */
     public function changePassword(string $pass):bool{
-
+        if(!$this->active()){
+            throw new Exception("El usuario ".$this->username." no está activo.");
+        }
+        
+        foreach(self::$usuarios as &$user){
+            if($user['username'] == $this->username
+               && $user['pass'] == $this->password){
+                $user['pass'] = hash('sha256',$pass);
+                $this->password=hash('sha256',$pass);
+                unset($user);
+                return TRUE;
+            }
+        }
+	return FALSE;	
     }
 
     /* Determina si el usuario es activo. 
@@ -117,7 +150,11 @@ class Usuario
      * @return array - contine objetos usuario 
      */
     public static function getUsuarios():array{
-	return self::$usuarios;        
+        $u=[];
+        foreach(self::$usuarios as $user){
+            $u[] =new Usuario($user['username'], $user['pass']);
+        }
+        return $u;
     }
     
 }
@@ -126,17 +163,39 @@ class Usuario
 
 /*************  Test Usuarios    **********/
 
-//$u= new Usuario('user1',hash('sha256','pass'));
+$u= new Usuario('user1',hash('sha256','pass'));
 
-var_dump(Usuario::getUsuarios());
-$usuario = new Usuario('dmontes', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8');
+var_dump($u->active());
 echo "\n ";
-var_dump($usuario->login());
-var_dump(Usuario::getUsuarios());
+var_dump($u->save());
+echo "\n ";
+$u->login();
+var_dump(Usuario::getRegistro());
+var_dump($u->changePassword('pops'));
+echo "\n ";
+$u->login();
+var_dump(Usuario::getRegistro());
 
+/*var_dump($u->save());
+echo "\n ";
+var_dump($u->active());
+echo "\n ";
+//var_dump($u->save());
+echo "\n ";
+var_dump(Usuario::getUsuarios());
+echo "\n ";
+$u->login();
+var_dump(Usuario::getUsuarios());
+$u->delete();
+var_dump(Usuario::getUsuarios());
+$usr = Usuario::getUsuarios();
+var_dump($usr[0]->active());
+
+var_dump(Usuario::getRegistro());
 
 //Usuario::$usuarios;
 
+/* Por que no usé username como llave :/ */
 
 
 
