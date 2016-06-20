@@ -1,0 +1,91 @@
+* Herramienta: https://www.adminer.org/
+* Llaves primarias
+  Las llaves primarias son el conjunto de valores mínimos que identifican inequívocamente
+  cada renglón en la tabla.
+
+* Llaves foráneas
+  Juan Pérez es profesor desde el 2011.
+  ¿Que pasa si la tupla de Juan Perez es borrada de la tupla persona?
+  Las llaves foráneas son refencias en una tabla a un reglón específico de otra. 
+  Sirven para guardar la coherencia e integridada de la información.
+
+* Conceptos básicos
+  * Subconsultas: consultas dentro de otra consultas. Pueden aparecer en la cláusula SELECT, 
+    en la cláusula WHERE o en la cláusula FROM. Regresan un conjunto de valores, dependiendo de la
+    estructura del conjunto pueden interpretarse como una tabla, una lista de datos o un sólo dato.
+    Ejemplo cláusula FROM:
+       
+    
+    Ejemplo cláusula WHERE:
+    select * from persona
+    where id in (select id_persona from alumno)
+    and id in (select id_persona from profesor);
+
+    
+* Vistas
+  Pueden verse como tablas artifiales. Supongamos que queremos 
+  obtener bla, bla y bla de la base tal, y eso lo queremos hacer cada que 
+  esto, esto y esto. 
+  En lugar de escribir cada vez la consulta puede guardarse en una vista
+  y tratarla como una sola tabla.
+
+  Dependiendo de la consulta pueden ser o no actualizables.
+  Para que una vista sea actualizable debe poderse conocer exactamente 
+  de dónde vino cada valor. 
+  Ejemplos de vistas no actualizables:
+  Cuando hay una unión... ¿Qué mass? ¿WHERE?
+
+  * Algunos tipos de vistas:
+    1. Vistas Materializadas.
+    2. Vistas Normales.
+    3. CTE (WITH Queries)
+
+* Vistas Materializadas. 
+  Son tablas artificiales que no son temporales y que guardan la información
+  de cuándo fueron creadas. Puede refrescarse la vista con la instrucción
+  REFRESH MATERIALIZED VIEW.
+  Son recomendables cuando recopilan gran cantiad de datos, son consultadas
+  con gran frecuencia y las tablas incolucradas en la consulta no son 
+  actualizadas con gran frecuencias.
+  
+* Common Table Expresions (WHITH Queries)
+  Estructura provista por el manejador que permite crear 
+  tablas temporales al vuelo 
+  sobre las cuales pueden hacerse consultas.
+
+  
+* Funciones 
+  El manejador puede alojar funciones, esas funciones pueden 
+  modificar, agregar o borrar el contenido de la información en las tablas.
+  O sólo hacer consultas para obtener información y desplegarla en cierto
+  formato requerido.
+
+  Nota; es importante recalcar que el manejador
+  /sirve/ para guardar y representar la información.
+  /NO/ para realizar procedimientos.
+
+  * Lenguajes en los que se puede escribir una función dentro de Postgres:
+    * Mantenidos por el manejador:
+      1. SQL
+      2. PL/pgSQL: Procedural Language/PostgreSQL Structured Query Language 
+      3. PL/Perl: Procedural Language/Perl
+      4. PL/Tcl: Procedural Language/Tcl
+    * Mantenidos externamente:
+      1. PL/Java: 
+      2. PL/PHP:
+      3. PL/Ruby:
+      4. PL/Scheme:
+      5. PL/sh:
+
+
+* Ejercicios    
+  1. ¿Cuantos curso de Animales 2  hay en el semestre tal?
+  2. El total de alumnos inscritos en la materia Animales 2.
+  3. Información de los semestres:
+     - cursos, profesores e insctritos
+  4. Lista de los horarios de los salones del semestre 2015-1
+     - salon, hora, materia
+  5. 
+     
+
+

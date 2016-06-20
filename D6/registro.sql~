@@ -1,0 +1,2 @@
+select * from persona
+where id in (select id_persona )
