@@ -62,7 +62,7 @@ add constraint un_curso EXCLUDE USING gist (id_salon with =, horario with &&);
 
 --------- Tuplas prueba
 begin;
-insert into semestre values
+insert into semestre (nombre_semestre) values
 ('2017-1'),
 ('2016-2'),
 ('2016-1'),
@@ -81,22 +81,77 @@ insert into curso values
 ('0834','Plantas 1'),
 ('7324','Plantas 1');
 
-insert into salon values
+insert into salon (nombre_salon)  values
 ('Aula Magna 1, Tlahuiz, Piso 2'),
 ('Aula 123, Edificio P, Piso 1'),
 ('Aula 212, Edificio P, Piso 2');
 
 
 
---Consultas:
---1. Consulta que devuelve el semestre 2015-1 y cada uno de sus cursos y salones.
+Consultas:
+1. Consulta que devuelve el semestre 2015-1 y cada uno de sus cursos y salones.
 
+DROP view cursos_2015_1;
 
-select * from (
+create or replace view cursos_2015_1 AS 
+select	
+		s.nombre_salon,
+		c.clave
+	from (
        select cp.id, cp.id_semestre, cp.id_curso
        from curso_profe cp
        join semestre s on (s.id=cp.id_semestre)
        where s.nombre_semestre like '2015-1' ) as t1
 join salon_curso sc on (t1.id = sc.id_curso_prof)
 join salon s on (sc.id_salon=s.id)
+join curso c on (c.clave = t1.id_curso)
 ;
+
+CREATE MATERIALIZED VIEW salones AS
+select nombre_salon from salon;
+
+select * from salones;
+
+insert into salon (nombre_salon)  values
+('Aula 301, Yeliz, Piso 3');
+
+
+
+1. Consulta que devuelve el semestre 2015-1 y cada uno de sus cursos y salones.
+
+create view 2015_1 as 
+WITH cursos_2015_1 as (
+       select cp.id
+       	      , cp.id_semestre
+	      , cp.id_curso
+       from curso_profe cp
+       join semestre s on (s.id=cp.id_semestre)
+       where s.nombre_semestre like '2015-1'     
+       )
+       , salones as (
+       	 select *
+	 from salon_curso sc
+	 join salon s on (s.salon = sc.id_salon)
+       )
+select *
+from curso_2015_1 c
+join salones s (c.id = s.id)
+
+;
+
+
+CREATE OR REPLACE FUNCTION salones_cursos(semestre text)
+ returns table (salon text,curso text ) as $$
+select	s.nombre_salon,
+		c.nombre_curso
+	from (
+       select cp.id, cp.id_semestre, cp.id_curso
+       from curso_profe cp
+       join semestre s on (s.id=cp.id_semestre)
+       where s.nombre_semestre like semestre ) as t1
+join salon_curso sc on (t1.id = sc.id_curso_prof)
+join salon s on (sc.id_salon=s.id)
+join curso c on (c.clave = t1.id_curso)
+
+$$ language sql;
+

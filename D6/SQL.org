@@ -21,7 +21,7 @@
     where id in (select id_persona from alumno)
     and id in (select id_persona from profesor);
 
-    
+     
 * Vistas
   Pueden verse como tablas artifiales. Supongamos que queremos 
   obtener bla, bla y bla de la base tal, y eso lo queremos hacer cada que 
@@ -34,6 +34,31 @@
   de dónde vino cada valor. 
   Ejemplos de vistas no actualizables:
   Cuando hay una unión... ¿Qué mass? ¿WHERE?
+
+--1. Consulta que devuelve el semestre 2015-1 y cada uno de sus cursos y salones.
+
+
+select * from (
+       select cp.id, cp.id_semestre, cp.id_curso
+       from curso_profe cp
+       join semestre s on (s.id=cp.id_semestre)
+       where s.nombre_semestre like '2015-1' ) as t1
+join salon_curso sc on (t1.id = sc.id_curso_prof)
+join salon s on (sc.id_salon=s.id)
+;create view cursos_2015_1 AS 
+select	c.nombre_curso,
+		s.nombre_salon
+	from (
+       select cp.id, cp.id_semestre, cp.id_curso
+       from curso_profe cp
+       join semestre s on (s.id=cp.id_semestre)
+       where s.nombre_semestre like '2015-1' ) as t1
+join salon_curso sc on (t1.id = sc.id_curso_prof)
+join salon s on (sc.id_salon=s.id)
+join curso c on (c.clave = t1.id_curso)
+;
+
+
 
   * Algunos tipos de vistas:
     1. Vistas Materializadas.
@@ -53,7 +78,20 @@
   tablas temporales al vuelo 
   sobre las cuales pueden hacerse consultas.
 
-  
+WITH nombre_tabla_temp1 as (
+
+      ),
+     as nombre_tabla_temp2 as( 
+
+      ),
+       as nombre_tabla_temp3 as(
+       ),
+
+select * from 
+nombre_tabla_temp1
+join nombre_tabla_temp3
+join nombre_tabla_temp2
+ 
 * Funciones 
   El manejador puede alojar funciones, esas funciones pueden 
   modificar, agregar o borrar el contenido de la información en las tablas.
@@ -77,15 +115,16 @@
       4. PL/Scheme:
       5. PL/sh:
 
-
+	 
 * Ejercicios    
   1. ¿Cuantos curso de Animales 2  hay en el semestre tal?
   2. El total de alumnos inscritos en la materia Animales 2.
   3. Información de los semestres:
-     - cursos, profesores e insctritos
+     - cursos, profesores e inscritos
   4. Lista de los horarios de los salones del semestre 2015-1
      - salon, hora, materia
-  5. 
+ 
      
+
 
 
