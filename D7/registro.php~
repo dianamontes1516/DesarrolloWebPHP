@@ -30,10 +30,10 @@ while($loop){
 			$username = readline('Escriba username:');
 			$pass1 = readline('Escriba contraeña:');
 			$resultado =$controller->login($username, $pass1);
-		        if($resultado){
-                		echo "Acceso exitoso;";
-                		break;
-            		}
+            if($resultado){
+                echo "Acceso exitoso;";
+                break;
+            }
             echo "Credenciales inválidas";
 			break;
             

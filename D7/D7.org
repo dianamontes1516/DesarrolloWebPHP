@@ -1,0 +1,15 @@
+* Bases de datos
+  * tarea moral:
+    
+    * Función:
+    * Vista:  
+
+* Arquitectura: División en capas.
+  Modelo, Vista y Controlador
+  * Modelo: Capa de persistencia. Dónde se almacenan los datos.
+  Captura las características del la realidad. 
+  * Controlador: El que orquesta. Es el encargado de recibir la peticiones
+  del usuario y invocar las funciones necesarias provistas por el modelo para
+  atender con éxito la petición.
+  * Vista: la interfaz con la que el usuario interactúa con el sistema.
+

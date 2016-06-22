@@ -44,8 +44,13 @@ class Datos
         return $elementos;
     }
 
-    public function select(string $id):stadClass{
-        
+    public function select(string $id):stdClass{
+        $info = $this->tabla[$id];
+        $elemento = new stdClass;
+        foreach($info as $llave =>$valor){
+            $elemento->$llave = $valor;
+        }
+        return $elemento;
     }
     
 }

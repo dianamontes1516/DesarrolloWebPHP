@@ -50,10 +50,7 @@ class UsuarioController
      * @return Usuario - regresa un objeto usuario
      */
     public function get(string $id):Usuario{
-        if(!$this->active($id)){
-            throw new Exception("Usuario no encontrado");
-        }
-        return self::convertToUsuario($this->datos->select($id));
+        
     }
     
     /* @param  username - identificador del usuario.
@@ -61,16 +58,7 @@ class UsuarioController
      * @return bool- verdarero en caso de éxito, falso en otro caso
      */
     public function login(string $username, string $pass ):bool{
-        try{
-            $u=$this->get($username);
-        }catch(Exception $e){
-            return false;
-        }
-
-        if($u->getPass() == hash('sha256',$pass)){
-            return true;
-        }
-        return false;
+        
     }
 
     /* Borra al usuario del arreglo de los
@@ -80,6 +68,20 @@ class UsuarioController
      *              exista un usuario activo con esos datos.  
      */
     public function delete(string $id):bool{
+        if(!$this->active()){
+            throw new Exception("El usuario ".$this->username." no está activo.");
+        }
+
+        $i=0;
+        foreach(self::$usuarios as $user){
+            if($user['username'] == $this->username){
+                break;
+            }
+            $i++;
+        }
+        unset(self::$usuarios[$i]);
+        return TRUE;
+
     }
 
     /* Borra al usuario del arreglo de los
@@ -89,6 +91,20 @@ class UsuarioController
      *              exista un usuario activo con esos datos.  
      */
     public function edit(Usuario $u, array $info):bool{
+        if(!$this->active()){
+            throw new Exception("El usuario ".$this->username." no está activo.");
+        }
+
+        $i=0;
+        foreach(self::$usuarios as $user){
+            if($user['username'] == $this->username){
+                break;
+            }
+            $i++;
+        }
+        unset(self::$usuarios[$i]);
+        return TRUE;
+
     }
     
 
@@ -109,7 +125,6 @@ class UsuarioController
         return $this->datos->all();
     }
 
-	
     public static function convertToStdcClass(Usuario $u ):stdClass{
         $nuevostdC = new stdClass();
         $nuevostdC->username = $u->getUsername();
@@ -119,10 +134,6 @@ class UsuarioController
         return $nuevostdC;            
     }
     
-    public static function convertToUsuario(stdClass $s ):Usuario{
-        $nuevoU = new Usuario($s->username, $s->password, $s->name, $s->last_login);
-        return $nuevoU;            
-    }
 }
 
 

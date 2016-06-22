@@ -124,7 +124,17 @@ join nombre_tabla_temp2
   4. Lista de los horarios de los salones del semestre 2015-1
      - salon, hora, materia
  
-     
+
+CREATE OR REPLACE VIEW materias (Materia, Prof_Nombre, Prof_APaterno, Prof_AMaterno, Alum_Nombre, Alum_APaterno, Alum_AMaterno) AS 
+    SELECT CSO.nombre_curso
+    , NOMPROF.nombre, NOMPROF.a_paterno, NOMPROF.a_materno, NOMALUM.nombre, NOMALUM.a_paterno, NOMALUM.a_materno 
+    FROM curso AS CSO JOIN curso_profe AS CSOPROF ON (CSO.clave = CSOPROF.id_curso) 
+        JOIN profesor AS PROF ON (CSOPROF.id_profesor = PROF.num_trabajador)
+            JOIN persona AS NOMPROF ON (PROF.id_persona = NOMPROF.id)
+                JOIN curso_alumno AS CSOAL ON (CSOPROF.id = CSOAL.id_curso_prof)
+                    JOIN alumno AS AL ON (CSOAL.id_alumno = AL.num_cuenta)
+                        JOIN persona AS NOMALUM ON (AL.id_persona = NOMALUM.id); 
 
 
 
+  
