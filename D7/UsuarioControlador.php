@@ -1,5 +1,6 @@
 <?php
-require_once('Datos.php');
+require_once('DatosArreglo.php');
+require_once('DatosPSQL.php');
 require_once('Usuario.php');
 /** 
 */
@@ -10,10 +11,13 @@ class UsuarioController
 
 
     public function __construct(){
-        $this->datos = new Datos(['cols' => ['username','password','last_login','name']
+        $this->datos = new DatosArreglo(['cols' => ['username','password','last_login','name']
                                 ,'llave' => 'username']);
     }
 
+    /** Se encarga de validar la información para 
+     * 
+     */
     public function nuevoUsuario(array $info):array{
         if($info['pass1'] != $info['pass2']){
             return ['status' => 0, 'mensaje'=>'Las contraseñas no coinciden'];
@@ -56,7 +60,8 @@ class UsuarioController
         return self::convertToUsuario($this->datos->select($id));
     }
     
-    /* @param  username - identificador del usuario.
+    /** Intenta hacer login con las credenciales pasadas  
+     * @param  username - identificador del usuario.
      * @param pass - contraseña en texto plano
      * @return bool- verdarero en caso de éxito, falso en otro caso
      */
@@ -68,27 +73,45 @@ class UsuarioController
         }
 
         if($u->getPass() == hash('sha256',$pass)){
-            return true;
+            return $this->edit($username,['last_login'=>date("F j, Y, g:i a")]);
         }
+        
         return false;
     }
 
-    /* Borra al usuario del arreglo de los
-     * usuarios activos.
-     * @return bool- verdarero en caso de éxito
-     *               lanza una excepción en caso de que no
-     *              exista un usuario activo con esos datos.  
+    /* Borra al usuario del almacenamiento persistente
+     * @return bool- verdarero en caso de éxito, falso
+     *  en cualquier otro caso.
      */
     public function delete(string $id):bool{
+        if(!$this->active($id)){
+            throw new Exception("Usuario no encontrado");
+        }
+        return $this->datos->delete($id);        
     }
 
-    /* Borra al usuario del arreglo de los
-     * usuarios activos.
+    /** Actualiza la información en el banco de datos
+     * @param id - username del usuario a modificar
+     * @param array - información nueva
+     *   debe estar en forma de arreglo asociativo. 
+     *   las llaves corresponden al nombre de los atributos.
      * @return bool- verdarero en caso de éxito
      *               lanza una excepción en caso de que no
      *              exista un usuario activo con esos datos.  
      */
-    public function edit(Usuario $u, array $info):bool{
+    public function edit(string $id, array $info):bool{
+        if(!$this->active($id)){
+            throw new Exception("Usuario no encontrado");
+        }
+
+        $u= new stdClass;
+        $u->username = $id;
+        foreach($info as $key => $value){
+            $u->$key = $value;
+        }
+        
+        return $this->datos->update($u);        
+        
     }
     
 
