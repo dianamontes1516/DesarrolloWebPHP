@@ -1,29 +1,47 @@
 * Pequeño manual de git
   + Instrucciónes básicas
     * git add (. ó nombre_archivo):
-      Cuando se usa con punto se agregan todos los archivos que fueron modificados.
+      Cuando se usa con punto (.) se agregan todos los archivos que fueron modificados.
       Cuando sólo se especifica el nombre de un archivo, solo se agrega el archivo especificado.
-    * git commit -m "mensaje del commit.":
-      Crea un punto de retorno en la historia.
 
+    * git commit -m "mensaje del commit.":
+      Crea un punto de retorno en la historia y prepara los cambios locales para ser mezclados con los archivos del repositorio central.
+      
     * git pull
-      recolecta los cambios del repositorio hecho después de la última actualización al repositorio local.
-      Mezcla los archivos del commit. Si hubo cambios, pero no hubo un commit, entonces no se podrán
+      Actualiza los cambios registrados en el repositorio central en el repositorio local.
+      Si hubo cambios locales pero no un commit, entonces no se podrá
       hacer una actualización de los cambios del repositorio central.
+
     * git push
-      empuja los cambios locales al repositorio central.
+      Empuja los cambios locales al repositorio central.
    
   + Ramas:
-    * Es recomendable hacer ramas por cada una de las tareas que se realicen.
-    para crear una rama y cambiar a ella:
-    git checkout -b ramaX
-    
-    * después de hacer losa cambios, se agregan (git add .) 
-    * Se hace un commit 
-    * Se cambia a la rama master git checkout master
-    * se actualiza el repositorio git pull
-    * luego se mezclan los archivos de la ramaX 
+    Por omisión nos encontramos en la rama master, pero es recomendable hacer ramas por cada una de las tareas que se realicen.
+    Una rama puede verse como una bifurcación en la historia. 
+    * git branch ramaX
+      Creación de una ramaX llamada ramaX.
 
+    * git checkout ramaX
+      Cambio a la rama ramaX.
+
+    * git checkout -b ramaX:
+      Esta instrucción es equivalente a crear la rama y cambiarte inmediatamente a ella.
+
+    * Flujo de instrucciones para mezclar los cambios hecho en una rama diferente a master a master: 
+      1. después de hacer losa cambios en ramaX, se agregan (git add .) 
+      2. Se hace un commit (git commit -m "mensaje...")
+      3. Se cambia a la rama master (git checkout master)
+      4. se actualiza el repositorio (git pull)
+      5. luego se mezclan los archivos de la ramaX (git merge ramaX)
+      6. Se empujan los cambios (git push)
     
+  + Otras instrucciones
+    * git log
+      Puedo ver los commits que se han hecho sobre esa rama, y quién los ha hecho.
+    * git log nombre_archivo
+      Puedo ver los commits que se han hecho sobre esa rama a nombre_archivo, y quién los ha hecho.
+    * la opción -p (git log -p nombre_archivo, git log -p ) muestra exactamente los cambios que 
+      se realizaron, es decir, líneas modificadas/agregadas y líneas borradas. 
+      
 
      
