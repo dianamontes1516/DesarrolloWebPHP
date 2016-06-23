@@ -1,0 +1,29 @@
+* Pequeño manual de git
+  + Instrucciónes básicas
+    * git add (. ó nombre_archivo):
+      Cuando se usa con punto se agregan todos los archivos que fueron modificados.
+      Cuando sólo se especifica el nombre de un archivo, solo se agrega el archivo especificado.
+    * git commit -m "mensaje del commit.":
+      Crea un punto de retorno en la historia.
+
+    * git pull
+      recolecta los cambios del repositorio hecho después de la última actualización al repositorio local.
+      Mezcla los archivos del commit. Si hubo cambios, pero no hubo un commit, entonces no se podrán
+      hacer una actualización de los cambios del repositorio central.
+    * git push
+      empuja los cambios locales al repositorio central.
+   
+  + Ramas:
+    * Es recomendable hacer ramas por cada una de las tareas que se realicen.
+    para crear una rama y cambiar a ella:
+    git checkout -b ramaX
+    
+    * después de hacer losa cambios, se agregan (git add .) 
+    * Se hace un commit 
+    * Se cambia a la rama master git checkout master
+    * se actualiza el repositorio git pull
+    * luego se mezclan los archivos de la ramaX 
+
+    
+
+     
