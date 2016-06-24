@@ -1,0 +1,21 @@
+* Bibliotecas de php para la conexion a la base de datos:
+  1. Funciones para PortgresSQL:
+     http://php.net/manual/es/ref.pdo-pgsql.php
+     http://php.net/manual/en/ref.pgsql.php
+     * pg_connect(string cadena_conexion):resource
+     * pg_query(string consulta):resource ... o falso :/
+     * pg_last_error():string
+     * pg_fetch_all(resource):arrray
+     * pg_fetch_assoc(resource):array
+
+  2. PDO: PHP Data Objects
+     http://php.net/manual/en/book.pdo.php
+     Es una clase de PHP para bases de datos genérica. Es decir, únicamente se especifica el manejador
+     a la hora de crear una instancia de esta clase.
+     * Instalación: agregar el módulo 
+
+* Problemas de implementación
+  - De una base relacional a una aplicación Orientada a objetos.
+    Object-Relational Impedance Missmatch 
+  - Soluciones en el mercado: ORM
+  

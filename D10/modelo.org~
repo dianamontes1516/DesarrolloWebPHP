@@ -1,0 +1,36 @@
+* Diseño de la base de datos:
+  1. Las tablas deben estar al menos en FN1 y FN2
+     * Ninguna columna puede tener mas de un valor. 
+       Ejemplo: 
+       columna contacto "correo@mail.com:5553982"
+     * El orden en el que las tuplas son devueltas es irrelevantes,
+       es decir, el orden no agrega significado.
+      
+  2. Se deben evitar los valores nulos y los valores repetidos.
+     * Tercer valor; /indefinido/. Otros, /verdadero/ y /falso/
+     * Tabla de verdad [[https://en.wikipedia.org/wiki/Null_(SQL)#cite_ref-fourrules_9-0]]
+
+  3. Ejercicio:
+     * Crear la carpeta modelo y detro de esa carpeta el script sql con las tablas para su base de 
+       datos. 
+       * ¿Cómo comprobar que es un diseño correcto? Satisface los casos de uso.
+       * ¿Cómo comprobar que es un buen diseño? Es correcto, está normalizada, no tiene valores nulos
+         tienes las restricciones necesarias, no hay repetición de valores.
+     * Pensar en funciones que los ayuden a representar la información de manera conveniente para
+       satisfacer los casos de uso.
+       
+* Bibliotecas de php para la conexion a la base de datos:
+  1. Funciones para PortgresSQL:
+     http://php.net/manual/es/ref.pdo-pgsql.php
+     http://php.net/manual/en/ref.pgsql.php
+     * pg_connect(string cadena_conexion):resource
+     * pg_query(string consulta):resource ... o falso :/
+     * pg_last_error():string
+     * pg_fetch_all(resource):arrray
+     * pg_fetch_assoc(resource):array
+
+  2. PDO: PHP Data Objects
+     http://php.net/manual/en/book.pdo.php
+     Es una clase de PHP para bases de datos genérica. Es decir, únicamente se especifica el manejador
+     a la hora de crear una instancia de esta clase.
+     * Instalación: agregar el módulo 
