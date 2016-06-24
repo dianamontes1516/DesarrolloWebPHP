@@ -168,7 +168,7 @@ begin;
 -- las restricciones de las tablas
 SELECT personas(6000); 
 -- si hubo un error, rollback; y probar de nuevo
--- begin; SELECT personas(6000); 
+-- begin; SELECT personas(6000);
 rollback;
 -- si no hubo ningún error, continuar con las pruebas.
 

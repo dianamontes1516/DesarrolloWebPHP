@@ -17,26 +17,11 @@ class DB
             echo "Unable to conect to Database.";
         }
     }
+
+    public function getCon():PDO{
+        return $this->con;  
+    }
     
-    /**
-     * Función que realiza una consulta a la base de datos
-     * En caso de que la bandera de ambiente DEBUG_SQL esté
-     * definida como 'true' se realiza depuración de errores
-     *
-     * @param {string} query - Consulta a realizar
-     */
-    public static function statement($query){
-    }
-
-    /**
-     * Función que proporciona información de una consulta SQL
-     * con el fin de realizar depuración de errores
-     *
-     * @param {string} query - Consulta a debuggear
-     */
-    public static function debug($query){
-    }
-
     /**
      * Fúnción para realizar un query a la base de datos
      * @param <string> $query - consulta
@@ -45,14 +30,14 @@ class DB
        @return Si hubo error en la consulta regresa falso. Si la consulta fue exitosa,
        pero no hay renglones que devolver, regresa []. Si fue exitosa y obtuvo renglones,
        regresa un arreglo con los valores encontrados
-     */
+     */ 
     public function query($query,$assoc){
         $resultado = $this->con->query($query);
         if($resultado === false){ //error
             return false;
         }else{
-            $resultado = $assoc ? pg_fetch_assoc($resultado)
-                       : pg_fetch_all($resultado);
+            $resultado = $assoc ? $resultado->fetch(PDO::FETCH_ASSOC)
+                       : $resultado->fetchAll(PDO::FETCH_ASSOC);
             if($resultado === false) {
                 return [];
             } else {
@@ -81,7 +66,7 @@ class DB
      * Función para realizar un rollback en una transacción
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public static function rollback(){
+    public function rollback(){
         return $this->con->rollBack();
     }
 
@@ -90,10 +75,12 @@ class DB
      * y que esta se haga sobre la columna de id de la tabla
      * @param  String $table Nombre de la tabla en la base de datos
      * @param  String $id    ID de búsqueda
-     * @return boolean        True en caso de éxito, false e.o.c
+     * @return 
      */
-    public static function select($table, $id):boolean{
-        return $this->query("SELECT * FROM {$table} WHERE id = '{$id}'",ASSOC);        
+    public function select($table, $id){
+        $b= $this->con->query("SELECT * FROM {$table} WHERE id = '{$id}'");
+        $b->setFetchMode(PDO::FETCH_CLASS, 'stdClass');
+        return $b->fetch();
     }
     
     /**
@@ -105,7 +92,7 @@ class DB
         @param Assoc(String=>String) $values Parámetro opcional para especificar columnas con ciertos valores para la búsqueda
         @return Array(Assoc) Resultado del select. Falso si hay un error
     */
-    public static function selectFilter($table,$cols,$values = null) {    
+    public function selectFilter($table,$cols,$values = null) {    
         $cols = implode(", ",$cols);
         if($values) {
             $query = "SELECT ".$cols." FROM {$table} WHERE ";
@@ -117,7 +104,9 @@ class DB
             $filtros[] = $llave." = "."'{$valor}'";
         }
         $query.= implode(' AND ', $filtros);
-        return $this->query($query,ALL);
+        $b= $this->con->query($query);
+        $b->setFetchMode(PDO::FETCH_CLASS, 'stdClass');
+        return $b->fetchAll();
     }
 
     /**
@@ -125,11 +114,11 @@ class DB
      * @param  String $table Nombre de la tabla en la base de datos
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public static function selectAll($table)
-    {
-	return $this->query(
-	    "SELECT * FROM {$table}",false
-	);
+    public function selectAll($table){
+        $b= $this->con->query("SELECT * FROM {$table}");
+        $b->setFetchMode(PDO::FETCH_CLASS, 'stdClass');
+        return $b->fetchAll();
+        //return $this->query("SELECT * FROM {$table}",ALL);
     }
 
     /**
@@ -138,11 +127,11 @@ class DB
      * @param String $column Columna por la cual ordenar
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public static function selectAllOrdered($table, $column)
+    public function selectAllOrdered($table, $column)
     {
-	return $this->query(
-	    "SELECT * FROM {$table} ORDER BY $column",false
-	);
+        $b= $this->con->query("SELECT * FROM {$table} ORDER BY $column");
+        $b->setFetchMode(PDO::FETCH_CLASS, 'stdClass');
+        return $b->fetchAll();
     }
 
     /**
@@ -152,11 +141,10 @@ class DB
      * @param  String $value  Valor que empatar en la búsqueda
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public static function where($table, $column, $value)
-    {
-	return $this->query(
-	    "SELECT * FROM {$table} WHERE {$column} = '{$value}'",ALL
-	);
+    public function where($table, $column, $value){
+        $b= $this->con->query("SELECT * FROM {$table} WHERE {$column} = '{$value}'");
+        $b->setFetchMode(PDO::FETCH_CLASS, 'stdClass');
+        return $b->fetchAll();
     }
 
     /**
@@ -173,7 +161,9 @@ class DB
             $filtros[] = $llave." = "."'{$valor}'";
         }
         $query.= implode(' AND ', $filtros);
-	return $this->query($query,false);
+        $b= $this->con->query($query);
+        $b->setFetchMode(PDO::FETCH_CLASS, 'stdClass');
+        return $b->fetchAll();
     }
 
     /**
@@ -183,7 +173,7 @@ class DB
      * @param  String $id     ID del update a realizar
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public static function update($table, $values, $id)
+    public function update($table, $values, $id)
     {
 	if (!isset($id) || !$id) {
 	    return false;
@@ -209,7 +199,7 @@ class DB
      * @param  array $values Arreglo de llaves y valores (columnas, valor)
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public static function insert($table, $values)
+    public function insert($table, $values)
     {
 	$columns = implode(', ', array_keys($values));
 	$values = implode('\', \'', array_values($values));
@@ -226,7 +216,7 @@ class DB
      * @param  String $id    ID por la cual realizar la eliminación
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public static function delete($table, $id)
+    public function delete($table, $id)
     {
 	if (!isset($id) || !$id) {
 	    return false;
@@ -240,6 +230,9 @@ class DB
     
 }
 
-print_r(PDO::getAvailableDrivers());
-
 $c = new DB();
+//var_dump($c->select('profesor','10000'));
+var_dump($c->selectAll('profesor'));
+
+/* Instrucción para verificar si tiene instalado el driver */
+//print_r(PDO::getAvailableDrivers());
