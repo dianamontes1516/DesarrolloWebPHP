@@ -170,7 +170,15 @@ where p.id_usuario = ''
 \d prestamo
 \d multa
 
-select *
-from ejemplares
-join libros;
+select l.titulo
+       , l.autor
+       , count(e.id)
+from ejemplares e 
+join libro l on(e.id_libro = l.id)
+where e.id not in
+(SELECT id_ejemplar
+from prestamo
+where upper(periodo) = 'infinity')
+group by l.id
+;
 
