@@ -1,7 +1,7 @@
 <?php 
 /********************************************************************
  ********************************************************************
- * Configuración de la aplicación del Sistema de Personal de Base
+ * Configuración de la aplicación del Sistema 
  ********************************************************************
  *********************************************************************/
 /**
@@ -17,7 +17,7 @@ if (AMBIENTE === 'DESARROLLO') {
 	define('ALL', false);	
     define('DB_HOST', '127.0.0.1');
 	define('DB_PORT', '5432');
-    define('DB_NAME', 'escuela');
+    define('DB_NAME', 'biblioteca');
 	define('DB_USER', 'personal');
     define('DB_PASSWORD', 'kndaXBNU');
 

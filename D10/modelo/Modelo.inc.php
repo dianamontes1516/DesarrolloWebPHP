@@ -11,6 +11,7 @@ class Modelo
      * @var string
      */
     protected $tabla;
+    protected $id;
     private $base;
 
     /**
@@ -42,8 +43,8 @@ class Modelo
      * @param  string $id Identificador del modelo en la BD
      * @return array     Modelo
      */
-    public function find($id){
-        return $this->base->select($this->tabla, $id);
+    public function find($id,$col='id'){
+        return $this->base->select($this->tabla, $id, $col);
     }
 
     /**
@@ -115,14 +116,4 @@ class Modelo
         return $this->base->query($q,$modo);
     }
 }
-
-$m = new Modelo('profesor');
-
-//print_r($m->query('select * from p',ALL));
-print_r($m->all());
-
-/* Ejercicio 
- * - Darse de alta como alumnos.
- * Requieren la base escuela.
- */
 

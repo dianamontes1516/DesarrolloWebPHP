@@ -1,5 +1,5 @@
 <?php
-require_once 'conexion.php';
+require_once 'configuracion.inc.php';
 
 /**
  * Clase DB para abstraer operaciones repetitivas con la base de datos.
@@ -36,6 +36,7 @@ class DB
         if($resultado === false){ //error
             return false;
         }else{
+            $resultado->setFetchMode(PDO::FETCH_CLASS, 'stdClass');
             $resultado = $assoc ? $resultado->fetch(PDO::FETCH_ASSOC)
                        : $resultado->fetchAll(PDO::FETCH_ASSOC);
             if($resultado === false) {
@@ -77,8 +78,8 @@ class DB
      * @param  String $id    ID de búsqueda
      * @return 
      */
-    public function select($table, $id){
-        $b= $this->con->query("SELECT * FROM {$table} WHERE id = '{$id}'");
+    public function select($table, $id, $col='id'){
+        $b= $this->con->query("SELECT * FROM {$table} WHERE {$col} = '{$id}'");
         $b->setFetchMode(PDO::FETCH_CLASS, 'stdClass');
         return $b->fetch();
     }
@@ -161,6 +162,7 @@ class DB
             $filtros[] = $llave." = "."'{$valor}'";
         }
         $query.= implode(' AND ', $filtros);
+        echo $query;
         $b= $this->con->query($query);
         $b->setFetchMode(PDO::FETCH_CLASS, 'stdClass');
         return $b->fetchAll();
@@ -173,24 +175,23 @@ class DB
      * @param  String $id     ID del update a realizar
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public function update($table, $values, $id)
-    {
-	if (!isset($id) || !$id) {
-	    return false;
-	}
+    public function update($table, $values, $id){
+        if (!isset($id) || !$id) {
+            return false;
+        }
 
-	$valuesClause = array();
-	foreach ($values as $key => $value) {
+        $valuesClause = array();
+        foreach ($values as $key => $value) {
             if(is_null($value) || $value === 'null') {
-                 $valuesClause[] = "{$key} = NULL";
+                $valuesClause[] = "{$key} = NULL";
             } else {
                 $valuesClause[] = "{$key} = '{$value}'";
             }
-	}
-	$valuesClause = implode(', ', $valuesClause);
-	return $this->query(
-	    "UPDATE {$table} SET {$valuesClause} WHERE id = '{$id}'",ASSOC
-	);
+        }
+        $valuesClause = implode(', ', $valuesClause);
+        return $this->query(
+            "UPDATE {$table} SET {$valuesClause} WHERE id = '{$id}'",ASSOC
+        );
     }
 
     /**
@@ -199,15 +200,14 @@ class DB
      * @param  array $values Arreglo de llaves y valores (columnas, valor)
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public function insert($table, $values)
-    {
-	$columns = implode(', ', array_keys($values));
-	$values = implode('\', \'', array_values($values));
+    public function insert($table, $values){
+        $columns = implode(', ', array_keys($values));
+        $values = implode('\', \'', array_values($values));
         
-	return $this->query(
-	    "INSERT INTO {$table} ({$columns}) VALUES ('{$values}') RETURNING *",
-	    ASSOC
-	);
+        return $this->query(
+            "INSERT INTO {$table} ({$columns}) VALUES ('{$values}') RETURNING *",
+            ASSOC
+        );
     }
 
     /**
@@ -216,23 +216,22 @@ class DB
      * @param  String $id    ID por la cual realizar la eliminación
      * @return boolean        True en caso de éxito, false e.o.c
      */
-    public function delete($table, $id)
-    {
-	if (!isset($id) || !$id) {
-	    return false;
-	}
+    public function delete($table, $id){
+        if (!isset($id) || !$id) {
+            return false;
+        }
 
-	return $this->query(
-	    "DELETE FROM {$table} WHERE id = '{$id}'",
-	    ASSOC
-	);
+        return $this->query(
+            "DELETE FROM {$table} WHERE id = '{$id}'",
+            ASSOC
+        );
     }
     
 }
 
 $c = new DB();
 //var_dump($c->select('profesor','10000'));
-var_dump($c->selectAll('profesor'));
+//var_dump($c->selectAll('profesor'));
 
 /* Instrucción para verificar si tiene instalado el driver */
 //print_r(PDO::getAvailableDrivers());
