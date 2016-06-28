@@ -170,15 +170,28 @@ where p.id_usuario = ''
 \d prestamo
 \d multa
 
+with prestamos
+
 select l.titulo
        , l.autor
-       , count(e.id)
+       , count(e.id) as total
+       , count(p.id) as prestamos
+       , count(e.id) -count(p.id) as disponibles
 from ejemplares e 
-join libro l on(e.id_libro = l.id)
-where e.id not in
-(SELECT id_ejemplar
-from prestamo
-where upper(periodo) = 'infinity')
+join libro l on (e.id_libro = l.id)
+Left join prestamos_activos p on (e.id=p.id_ejemplar) 
 group by l.id
 ;
 
+\d usuario
+
+create view prestamos_activos AS
+select id
+       , id_usuario
+       , id_ejemplar
+       , lower(periodo) as fecha_inicio 
+from prestamo
+where upper(periodo) = 'infinity'
+;
+drop view prestamos_activos;
+\d prestamos_activos

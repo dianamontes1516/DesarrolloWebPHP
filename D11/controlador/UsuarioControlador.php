@@ -17,6 +17,14 @@ class UsuarioControlador
         $this->libroM = new LibroModelo();
     }
 
+    public function alta(Usuario $u){
+        $info = $this->usuarioM->find($u->username,'username');
+        if(isset($info->username) === true){
+            echo "Usuario ya registrado";
+            return false;
+        }
+        return $this->usuarioM->alta($u); 
+    }
 
     /* $pass en texto plano
      */
@@ -36,10 +44,14 @@ class UsuarioControlador
         
     }
 
-    /* Como usuario quiero ver mis préstamos activos.
+    public function info(string $id){
+        return $this->usuarioM->find($id,'username');
+    }
+    
+     /* Como usuario quiero ver mis préstamos activos.
      */
     public function prestamos_activos(string $id_u){
-        $usuario = $usuarioM->find($id,'username');
+        $usuario = $this->usuarioM->find($id,'username');
         if(isset($info->username) === false){
             echo "Usuario no encontrado";
             return false;
@@ -60,8 +72,13 @@ class UsuarioControlador
         return $pesos;
     }
 
+    public static function bienvenida():string{
+        $bienvenida = "Bienvenido a la biblioteca virtual del Yeliz.";
+        return $bienvenida;
+    }
     
 }
-
+/*
 $uC = new UsuarioControlador();
 var_dump($uC->login('fua2', 'fuasda2'));
+*/

@@ -2,9 +2,15 @@
 require_once($ruta.'/modelo/PrestamoModelo.php');
 class PrestamoControlador
 {
-
+    private $usuarioM;
+    private $prestamoM;
+    
+    public function __construct(){
+        $this->usuarioM = new UsuarioModelo();
+        $this->prestamoM = new PrestamoModelo();
+    }
+    
     /* Recibe el total de días que duró el préstamo
-     * y establece las políticas de multas.
      */
     public static function calcula_multa(int $dias, int $renovaciones):float{
         $dias_permitidos = 7;
@@ -17,4 +23,12 @@ class PrestamoControlador
         }
         return $dias_multa * $multa_dia;        
     }
+
+    /* Realiza las validaciones necesarias para saber si es posible una
+     * renovación para ese préstamo
+     */
+    public function renovacion(string $id_p){
+        
+    }
+    
 }
