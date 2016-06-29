@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/controlador/UsuarioControlador.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/controlador/LibroControlador.php'; 
 session_name('Biblioteca');
 session_start();
-echo session_id();
+//echo session_id();
 
 //echo "Constante que contiene el nombre de sesión ".SID;
 //echo session_status();
@@ -13,11 +13,23 @@ return routeRequest();
 function routeRequest()
 {
     $uri = $_SERVER['REQUEST_URI'];
-    echo $_SERVER['HTTP_HOST'];
-    var_dump($_SESSION);
+    
+    //var_dump($_SESSION);
+
+    if ($uri == '/Biblio/usuarioValido'){
+        die(json_encode(['status'=>200, 'mesage'=> 'amdskam']));
+    }
     if ($uri == '/Biblio') {
         $c = new UsuarioControlador();
         echo UsuarioControlador::bienvenida();
+
+        /* pasan todos los jquerys*/
+    } elseif (preg_match("/\/vista\/js\/[\s\S]*.js/", $uri)){
+        echo file_get_contents($_SERVER['DOCUMENT_ROOT'].$uri);        
+    
+    } elseif ($uri == '/Biblio/login'){
+        echo file_get_contents('./vista/index.php');
+        
     } elseif (preg_match("/Biblio\/login(\/[a-zA-Z0-9]+){2}$/", $uri)){
         
         $u = new UsuarioControlador();

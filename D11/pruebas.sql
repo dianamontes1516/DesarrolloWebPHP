@@ -175,15 +175,19 @@ with prestamos
 select l.titulo
        , l.autor
        , count(e.id) as total
-       , count(p.id) as prestamos
-       , count(e.id) -count(p.id) as disponibles
 from ejemplares e 
 join libro l on (e.id_libro = l.id)
-Left join prestamos_activos p on (e.id=p.id_ejemplar) 
 group by l.id
 ;
 
+select id_libro, count(id)
+from ejemplares
+group by id_libro;
+
 \d usuario
+\d ejemplares
+
+
 
 create view prestamos_activos AS
 select id
