@@ -18,11 +18,11 @@ function validUser(valor){
 }
 
 $(document).ready(function() {
-    $('#usern').change(function(){
+    $('#').change(function(){
 	validUser(this.value);
     });	
     
-    $('#login').validate({
+    $('#alta').validate({
         rules: {
             usern: {
         	required: true,

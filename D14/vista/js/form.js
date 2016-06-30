@@ -1,16 +1,19 @@
-function validUser(valor){
+function login(usr, pass){
+    console.log("tratando de hacer login");
     $.ajax({
-        url: 'usuarioValido', // Biblio/usuarioValido
+        url: 'controlador/login', // Biblio/
         method: 'POST',
         dataType: 'json',
-        data: {username:valor},
+        data: {username:usr,
+	       pass:pass
+	      },
         success: function(response) {
             if(response.status == 200) {
-		console.log(response);
-                alert('usuario válido');
+		url = "/Biblio/usuario/inicio";
+		$( location ).attr("href", url);
             } else {
 		console.log(response);
-		alert('usuario no válido');
+		alert(response.message);
             }
         }
     });
@@ -18,19 +21,18 @@ function validUser(valor){
 }
 
 $(document).ready(function() {
-    $('#usern').change(function(){
-	validUser(this.value);
-    });	
+    $('#login').submit(function(){
+	event.preventDefault();
+	login($('#usern').val(),$('#pass').val());
+    });
     
     $('#login').validate({
         rules: {
             usern: {
         	required: true,
-		alfabetico: true,
             },
 	    pass: {
         	required: true,
-		alfabetico: true,
 	    }
         },
         messages: {

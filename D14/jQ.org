@@ -1,0 +1,14 @@
+* javascript 
+  
+* Jquery 
+  + Es un framework de javascript: una biblioteca escrita en javascript que 
+    facilita la manipulación del DOM, manejo de eventos y peticiones asíncronas 
+    con Ajax.
+  + Usos básicos más frecuentes
+    - validaciones
+    - peticiones asíncronas
+    - manipulación del DOM
+  + Validaciones:
+    - Biblioteca Validator 
+
+

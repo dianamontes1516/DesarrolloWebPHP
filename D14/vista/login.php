@@ -24,7 +24,7 @@
       </div>
 
       <div>
-          <button id="Cancel">  Cancelar    </button>
+          <button id="Cancel">  <a href='/Biblio'>Cancelar </a>   </button>
           <button id="Acceder">  Acceder     </button>
       </div>
     </form>
